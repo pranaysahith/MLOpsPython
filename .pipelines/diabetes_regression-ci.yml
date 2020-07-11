@@ -80,6 +80,9 @@ stages:
     variables:
       AMLPIPELINE_ID: $[ dependencies.Get_Pipeline_ID.outputs['getpipelineid.AMLPIPELINEID'] ]
     steps:
+    - bash: |
+       echo $WORKSPACE_SVC_CONNECTION $(WORKSPACE_SVC_CONNECTION)
+      displayName: 'echo vars'
     - task: ms-air-aiagility.vss-services-azureml.azureml-restApi-task.MLPublishedPipelineRestAPITask@0
       displayName: 'Invoke ML pipeline'
       inputs:
