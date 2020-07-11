@@ -41,6 +41,7 @@ resource "azurerm_application_insights" "amlai" {
   location            = azurerm_resource_group.amlrg.location
   resource_group_name = azurerm_resource_group.amlrg.name
   application_type    = "web"
+  retention_in_days   = 90
 }
 
 # Container registry for AML Service
