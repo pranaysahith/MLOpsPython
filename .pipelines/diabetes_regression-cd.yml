@@ -33,7 +33,6 @@ stages:
   condition: variables['ACI_DEPLOYMENT_NAME']
   jobs:
   - job: "Deploy_ACI"
-    environment: 'aci_dev'
     displayName: "Deploy to ACI"
     container: mlops
     timeoutInMinutes: 0
@@ -81,7 +80,6 @@ stages:
   condition: and(succeeded(), variables['AKS_DEPLOYMENT_NAME'])
   jobs:
   - job: "Deploy_AKS"
-    environment: 'aks_dev'
     displayName: "Deploy to AKS"
     container: mlops
     timeoutInMinutes: 0
