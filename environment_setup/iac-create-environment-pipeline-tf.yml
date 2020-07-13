@@ -24,7 +24,7 @@ variables:
 stages:
   - stage: Plan
     jobs:
-      - job: Install Terraform and plan deployment
+      - job: Plan_deployment
         steps:
           - script: | 
               wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip
