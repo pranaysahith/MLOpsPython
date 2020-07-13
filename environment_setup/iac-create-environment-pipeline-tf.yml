@@ -36,11 +36,11 @@ steps:
     backendServiceArm: $(AZURE_RM_SVC_CONNECTION)
     ensureBackend: true
     backendAzureRmResourceGroupLocation: $(LOCATION)
-    backendAzureRmResourceGroupName: $(RESOURCE_GROUP)
-    backendAzureRmStorageAccountName: '$(BASE_NAME)statestor'
+    backendAzureRmResourceGroupName: 'explore'
+    backendAzureRmStorageAccountName: 'terraformmlops01'
     backendAzureRmStorageAccountSku: 'Standard_LRS'
-    backendAzureRmContainerName: 'tfstate-cont'
-    backendAzureRmKey: 'mlopsinfra.tfstate'
+    backendAzureRmContainerName: 'tfstate'
+    backendAzureRmKey: 'mlops.state'
 
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
   displayName: 'TF validate - Deploy MLOps resources to Azure'
@@ -61,6 +61,7 @@ steps:
 
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
   displayName: 'TF apply - Deploy MLOps resources to Azure'
+  enabled: false
   inputs:
     command: apply
     workingDirectory: '$(Build.SourcesDirectory)/environment_setup/tf-templates'
