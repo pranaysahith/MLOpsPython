@@ -27,13 +27,15 @@ stages:
       - job: Plan_deployment
         steps:
           - script: | 
-              wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip
+              wget -q https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip
               unzip terraform_${tf_version}_linux_amd64.zip
               echo $PATH
-              mv terraform /usr/local/bin
+              pwd && ls -l 
+              mkdir bin && mv terraform bin/ && export PATH="$PATH:$(pwd)/bin" && echo $PATH
               rm terraform_${tf_version}_linux_amd64.zip
+              terraform version
             displayName: Install Terraform
             env:
               tf_version: 0.12.28
             
-             
+          
