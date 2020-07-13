@@ -82,7 +82,7 @@ stages:
 
   - stage: Deploy
     jobs:
-      - job: Terraform_Apply
+      - deployment: Terraform_Apply
         environment: cortex_dev
         steps:
           - task: AzureCLI@2
