@@ -26,13 +26,13 @@ stages:
     jobs:
       - job: Install Terraform and plan deployment
         steps:
-          - displayName: Install Terraform
-            script: | 
+          - script: | 
               wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip
               unzip terraform_${tf_version}_linux_amd64.zip
               echo $PATH
               mv terraform /usr/local/bin
               rm terraform_${tf_version}_linux_amd64.zip
+            displayName: Install Terraform
             env:
               tf_version: 0.12.28
             
