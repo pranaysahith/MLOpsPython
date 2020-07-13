@@ -50,7 +50,7 @@ stages:
                 export ARM_TENANT_ID=${tenantId}
                 cd environment_setup/tf-templates
                 terraform init -backend-config=resource_group_name=${rg_name} -backend-config=storage_account_name=${sta_name} -backend-config=container_name=${container_name} -backend-config=key=${key_name}
-                terraform workspace select $workspace_name | terraform workspace new $workspace_name
+                terraform workspace select $workspace_name || terraform workspace new $workspace_name
               addSpnToEnvironment: true
             env:
               workspace_name: dev
@@ -62,7 +62,7 @@ stages:
 
           - script: |
               terraform init -backend-config=resource_group_name=${rg_name} -backend-config=storage_account_name=${sta_name} -backend-config=container_name=${container_name} -backend-config=key=${key_name}
-              terraform workspace select $workspace_name | terraform workspace new $workspace_name
+              terraform workspace select $workspace_name || terraform workspace new $workspace_name
             displayName: Initialize Terraform
             workingDirectory: $(build.sourcesDirectory)/environment_setup/tf-templates
             enabled: false
