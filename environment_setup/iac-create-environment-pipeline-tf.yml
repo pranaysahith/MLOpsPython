@@ -79,6 +79,9 @@ stages:
               TF_VAR_workspace_name: "cortex-mlops"
               TF_VAR_resource_group: "rg-cortex-mlops"
               TF_VAR_base_name: "cortex"
+            
+          - publish: $(System.DefaultWorkingDirectory)
+            artifact: tf_config
 
   - stage: Deploy
     jobs:
