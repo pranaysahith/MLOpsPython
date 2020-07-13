@@ -8,7 +8,7 @@ autoScaler:
 authEnabled: True
 containerResourceRequirements:
     cpu: 1
-    memoryInGB: 4
+    memoryInGB: 1
 appInsightsEnabled: True
 scoringTimeoutMs: 5000
 maxConcurrentRequestsPerContainer: 2
