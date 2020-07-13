@@ -84,23 +84,26 @@ stages:
     jobs:
       - deployment: Terraform_Apply
         environment: cortex_dev
-        steps:
-          - task: AzureCLI@2
-            displayName: 'Terraform Apply'
-            inputs:
-              azureSubscription: $(AZURE_RM_SVC_CONNECTION)
-              scriptType: bash
-              scriptLocation: inlineScript
-              inlineScript: |
-                export ARM_CLIENT_ID=${servicePrincipalId}
-                export ARM_CLIENT_SECRET=${servicePrincipalKey}
-                export ARM_TENANT_ID=${tenantId}
-                cd environment_setup/tf-templates
-                terraform apply --auto-approve
-              addSpnToEnvironment: true
-            enabled: true
-            env:
-              ARM_SUBSCRIPTION_ID: 3a6427dc-dc3f-4c96-87e8-061fe67a3ea2
-              TF_VAR_workspace_name: "cortex-mlops"
-              TF_VAR_resource_group: "rg-cortex-mlops"
-              TF_VAR_base_name: "cortex"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureCLI@2
+                  displayName: 'Terraform Apply'
+                  inputs:
+                    azureSubscription: $(AZURE_RM_SVC_CONNECTION)
+                    scriptType: bash
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      export ARM_CLIENT_ID=${servicePrincipalId}
+                      export ARM_CLIENT_SECRET=${servicePrincipalKey}
+                      export ARM_TENANT_ID=${tenantId}
+                      cd environment_setup/tf-templates
+                      terraform apply --auto-approve
+                    addSpnToEnvironment: true
+                  enabled: true
+                  env:
+                    ARM_SUBSCRIPTION_ID: 3a6427dc-dc3f-4c96-87e8-061fe67a3ea2
+                    TF_VAR_workspace_name: "cortex-mlops"
+                    TF_VAR_resource_group: "rg-cortex-mlops"
+                    TF_VAR_base_name: "cortex"
